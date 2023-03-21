@@ -6,6 +6,7 @@
 #include <vector>
 #include <algorithm>
 #include <random>
+#include <chrono>
 #include "Factorial.h"
 #include "SortIt.h"
 
@@ -63,37 +64,60 @@ int main()
     auto mySortProblem3 = SortIt_Using_Heap(v);
     auto mySortProblem4 = SortIt_Using_Heap(v);
     auto SortedList = (Sorted*)SortIt::solveRecursive(mySortProblem1); //heheh you didnt see this
+    auto t1 = std::chrono::high_resolution_clock::now();
+    auto t2 = std::chrono::high_resolution_clock::now();
+    auto us_int = std::chrono::duration_cast<std::chrono::microseconds>(t2 - t1);
 
     for (int i = 0; i < iterations; i++) {
-        std::cout << "Iteration " << i + 1 << std::endl;
+        std::cout << "\nIteration " << i + 1 << std::endl;
 
         switch (mode) {
         case 'R':
             std::generate(v.begin(), v.end(), random_integer);
             mySortProblem1 = SortIt_Using_Heap(v);
-            SortedList = (Sorted*)SortIt::solveRecursive(mySortProblem1);
-            std::cout << "List Sorted (recursive)" << SortedList;
+
+            t1 = std::chrono::high_resolution_clock::now();
+                SortedList = (Sorted*)SortIt::solveRecursive(mySortProblem1);
+            t2 = std::chrono::high_resolution_clock::now();
+            us_int = std::chrono::duration_cast<std::chrono::microseconds>(t2 - t1);
+
+            std::cout << "    List Sorted (recursive)" << SortedList << "    Time: " << (long long)us_int.count() <<"us";
         break;
 
         case 'G':
             std::generate(v.begin(), v.end(), random_integer);
             mySortProblem2 = SortIt_Using_Heap(v);
-            SortedList = (Sorted*)SortIt::solveGreedy(mySortProblem2);
-            std::cout << "List Sorted (Greedy)" << SortedList;
+
+            t1 = std::chrono::high_resolution_clock::now();
+                SortedList = (Sorted*)SortIt::solveGreedy(mySortProblem2);
+            t2 = std::chrono::high_resolution_clock::now();
+            us_int = std::chrono::duration_cast<std::chrono::microseconds>(t2 - t1);
+
+            std::cout << "List Sorted (Greedy)" << SortedList << "    Time: " << (long long)us_int.count() << "us";
         break;
 
         case 'L':
             std::generate(v.begin(), v.end(), random_integer);
             mySortProblem3 = SortIt_Using_Heap(v);
-            SortedList = (Sorted*)SortIt::solveLasVegas(mySortProblem3);
-            std::cout << "List Sorted (Las Vegas)" << SortedList;
+
+            t1 = std::chrono::high_resolution_clock::now();
+                SortedList = (Sorted*)SortIt::solveLasVegas(mySortProblem3);
+            t2 = std::chrono::high_resolution_clock::now();
+            us_int = std::chrono::duration_cast<std::chrono::microseconds>(t2 - t1);
+
+            std::cout << "List Sorted (Las Vegas)" << SortedList << "    Time: " << (long long)us_int.count() << "us";
         break;
 
         case 'M':
             std::generate(v.begin(), v.end(), random_integer);
             mySortProblem4 = SortIt_Using_Heap(v);
-            SortedList = (Sorted*)SortIt::solveMonteCarlo(mySortProblem4);
-            std::cout << "List Sorted (Monte Carlo 1000 Iterations)" << SortedList;
+
+            t1 = std::chrono::high_resolution_clock::now();
+                SortedList = (Sorted*)SortIt::solveMonteCarlo(mySortProblem4);
+            t2 = std::chrono::high_resolution_clock::now();
+            us_int = std::chrono::duration_cast<std::chrono::microseconds>(t2 - t1);
+
+            std::cout << "List Sorted (Monte Carlo 1000 Iterations)" << SortedList << "    Time: " << (long long)us_int.count() << "us";
         break;
         }
     }
