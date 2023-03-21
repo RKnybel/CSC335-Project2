@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <vector>
 #include <execution>
+#include <random>
 
 
 class aSolution * Problem::solveDivideAndConquer(class Problem * aProblem) {
@@ -29,6 +30,14 @@ class aSolution * Problem::solveLasVegas(class Problem * aProblem) {
 class aSolution* Problem::solveMonteCarlo(class Problem * aProblem) {
 	// select a random action, copy the problem if it is not solved and time has not elapsed
 	// refine the copy and keep it if it is better.
+	auto monteCarloProblem = aProblem->createSolution();
+	int it = 0;
+	while (it < 1000) {
+		aProblem->applyRandomAction();
+		if (aProblem->better(aProblem))
+			monteCarloProblem = aProblem->createSolution();
+		it++;
+	}
 	return aProblem->createSolution();
 }
 
@@ -46,4 +55,11 @@ class aSolution * Problem::solveRecursive(class Problem * aProblem) {
 		return aProblem->createSolution();
 	auto newProblem = aProblem->simplifyProblem();
 	return Problem::solveRecursive(newProblem);
+}
+
+void Problem::applyRandomAction() {
+}
+
+bool Problem::better(class Problem * Reference) {
+	return true;
 }

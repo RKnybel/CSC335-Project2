@@ -32,25 +32,20 @@ SortIt::SortIt(std::vector<int> values_to_sort, std::vector<int> values_sorted, 
 
 bool SortIt::trivial() { return unsorted_values.size() < 1; };
 
-bool SortIt::better(class Problem* Reference) { return true; };
+bool SortIt::better(class Problem* Reference) { 
+	return true;
+}
 
 bool SortIt::solved() {
 	// this checks to see if the elements in the list are in ascending order.
 	// if so, this sets sorted to the list and returns true, otherwise it returns false.
-	int lastVal = -100000;
-	for (int i : sorted_values) {
-		if (lastVal < i)
-			return false;
-		else
-			lastVal = 1;
-	}
-
-	return true; 
-};
+	return std::is_sorted(unsorted_values.begin(), unsorted_values.end());
+}
 
 void SortIt::applyRandomAction() {
 	// apply a random action to the list, possibly a permutation.
-	auto rng = std::default_random_engine{}; //This random engine is literally fine for this purpose.
+	std::random_device rd;     // Only used once to initialise (seed) engine
+	std::mt19937 rng(rd());    // Random-number engine used (Mersenne-Twister in this case)
 	std::shuffle(std::begin(unsorted_values), std::end(unsorted_values), rng);
 }
 
@@ -82,7 +77,6 @@ std::vector<int> SortIt::merge(std::vector<int> L1, std::vector<int> L2)
 	}
 	return output;
 }
-;
 
 // we will split the unsorted lists into two problems with unsorted lists
 std::vector<Problem*> SortIt::make_subproblems() {

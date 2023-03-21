@@ -37,7 +37,7 @@ int main()
 
 
 
-    std::cout << "!--SORT TEST--!\n";
+    std::cout << "\n!--SORT TEST--!\n";
 
     auto random_integer = []() {
         std::random_device rd;     // Only used once to initialise (seed) engine
@@ -47,7 +47,8 @@ int main()
 
     
     
-    std::vector<int> v(10);
+    std::vector<int> v(9);
+
     std::generate(v.begin(), v.end(), random_integer);
     auto mySortProblem1 = SortIt_Using_Heap(v);
     auto SortedList = (Sorted *) SortIt::solveRecursive(mySortProblem1);
@@ -56,11 +57,18 @@ int main()
     std::generate(v.begin(), v.end(), random_integer);
     auto mySortProblem2 = SortIt_Using_Heap(v);
     SortedList = (Sorted*)SortIt::solveGreedy(mySortProblem2);
-    std::cout << "List Sorted (Greedy)" << SortedList;
+    std::cout << "\nList Sorted (Greedy)" << SortedList;
 
     std::generate(v.begin(), v.end(), random_integer);
     auto mySortProblem3 = SortIt_Using_Heap(v);
-    SortedList = (Sorted*)SortIt::solveLasVegas(mySortProblem2);
+    SortedList = (Sorted*)SortIt::solveLasVegas(mySortProblem3);
     std::cout << "List Sorted (Las Vegas)" << SortedList;
+
+    /* monte carlo in progress
+    std::generate(v.begin(), v.end(), random_integer);
+    auto mySortProblem4 = SortIt_Using_Heap(v);
+    SortedList = (Sorted*)SortIt::solveMonteCarlo(mySortProblem4);
+    std::cout << "List Sorted (Monte Carlo 1000 Iterations)" << SortedList;
+    */
 }
 
