@@ -48,5 +48,9 @@ public:
 	void selectBestAction() {
 		throw std::runtime_error("Not Implemented in the Factorial Problem");
 	};
+
+	int numSorted(){
+		throw std::runtime_error("Not Implemented in the Factorial Problem");
+	}
 	
 };

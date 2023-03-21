@@ -14,6 +14,7 @@ public:
 	virtual class Problem * simplifyProblem()=0;  // in paper this is called refine
 	virtual void selectBestAction() = 0;
 	virtual void applyRandomAction() = 0;
+	virtual int numSorted() = 0;
 	
 
 	static class aSolution * solveDivideAndConquer(class Problem *);

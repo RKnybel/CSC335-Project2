@@ -10,7 +10,6 @@ class SortIt :
 	std::vector<int> unsorted_values;
 	std::vector<int> sorted_values;
 	std::vector<int> heap;
-	int num_unsorted;
 	
 public:
 
@@ -19,6 +18,7 @@ public:
 	
 	bool trivial();
 	bool solved();
+	int numSorted();
 	bool better(class Problem* Reference);
 	std::vector<Problem*> make_subproblems();
 	class aSolution* createSolution();

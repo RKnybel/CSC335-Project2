@@ -30,12 +30,12 @@ class aSolution * Problem::solveLasVegas(class Problem * aProblem) {
 class aSolution* Problem::solveMonteCarlo(class Problem * aProblem) {
 	// select a random action, copy the problem if it is not solved and time has not elapsed
 	// refine the copy and keep it if it is better.
-	auto monteCarloProblem = aProblem->createSolution();
+	auto lastProblem = aProblem;
 	int it = 0;
 	while (it < 1000) {
 		aProblem->applyRandomAction();
-		if (aProblem->better(aProblem))
-			monteCarloProblem = aProblem->createSolution();
+		if (aProblem->better(lastProblem))
+			lastProblem = aProblem;
 		it++;
 	}
 	return aProblem->createSolution();
@@ -61,5 +61,10 @@ void Problem::applyRandomAction() {
 }
 
 bool Problem::better(class Problem * Reference) {
+	
 	return true;
+}
+
+int Problem::numSorted() {
+	return 0;
 }

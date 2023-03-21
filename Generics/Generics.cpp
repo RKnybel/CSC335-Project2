@@ -45,30 +45,57 @@ int main()
         std::uniform_int_distribution<int> uni(0, 100); // Guaranteed unbiased
         return uni(rng);};
 
-    
-    
-    std::vector<int> v(9);
+    std::cout << "Which algorithm? [R]ecursive, [G]reedy, [L]as Vegas or [M]onte Carlo?: ";
+    char mode = 'R';
+    std::cin >> mode;
 
-    std::generate(v.begin(), v.end(), random_integer);
+    std::cout << "How many items in the vector?: ";
+    int list_size = 6;
+    std::cin >> list_size;
+
+    std::cout << "How many test iterations?: ";
+    int iterations = 8;
+    std::cin >> iterations;
+    
+    std::vector<int> v(list_size);
     auto mySortProblem1 = SortIt_Using_Heap(v);
-    auto SortedList = (Sorted *) SortIt::solveRecursive(mySortProblem1);
-    std::cout << "List Sorted (recursive)" << SortedList;
-
-    std::generate(v.begin(), v.end(), random_integer);
     auto mySortProblem2 = SortIt_Using_Heap(v);
-    SortedList = (Sorted*)SortIt::solveGreedy(mySortProblem2);
-    std::cout << "\nList Sorted (Greedy)" << SortedList;
-
-    std::generate(v.begin(), v.end(), random_integer);
     auto mySortProblem3 = SortIt_Using_Heap(v);
-    SortedList = (Sorted*)SortIt::solveLasVegas(mySortProblem3);
-    std::cout << "List Sorted (Las Vegas)" << SortedList;
-
-    /* monte carlo in progress
-    std::generate(v.begin(), v.end(), random_integer);
     auto mySortProblem4 = SortIt_Using_Heap(v);
-    SortedList = (Sorted*)SortIt::solveMonteCarlo(mySortProblem4);
-    std::cout << "List Sorted (Monte Carlo 1000 Iterations)" << SortedList;
-    */
+    auto SortedList = (Sorted*)SortIt::solveRecursive(mySortProblem1); //heheh you didnt see this
+
+    for (int i = 0; i < iterations; i++) {
+        std::cout << "Iteration " << i + 1 << std::endl;
+
+        switch (mode) {
+        case 'R':
+            std::generate(v.begin(), v.end(), random_integer);
+            mySortProblem1 = SortIt_Using_Heap(v);
+            SortedList = (Sorted*)SortIt::solveRecursive(mySortProblem1);
+            std::cout << "List Sorted (recursive)" << SortedList;
+        break;
+
+        case 'G':
+            std::generate(v.begin(), v.end(), random_integer);
+            mySortProblem2 = SortIt_Using_Heap(v);
+            SortedList = (Sorted*)SortIt::solveGreedy(mySortProblem2);
+            std::cout << "List Sorted (Greedy)" << SortedList;
+        break;
+
+        case 'L':
+            std::generate(v.begin(), v.end(), random_integer);
+            mySortProblem3 = SortIt_Using_Heap(v);
+            SortedList = (Sorted*)SortIt::solveLasVegas(mySortProblem3);
+            std::cout << "List Sorted (Las Vegas)" << SortedList;
+        break;
+
+        case 'M':
+            std::generate(v.begin(), v.end(), random_integer);
+            mySortProblem4 = SortIt_Using_Heap(v);
+            SortedList = (Sorted*)SortIt::solveMonteCarlo(mySortProblem4);
+            std::cout << "List Sorted (Monte Carlo 1000 Iterations)" << SortedList;
+        break;
+        }
+    }
 }
 

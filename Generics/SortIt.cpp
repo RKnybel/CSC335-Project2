@@ -32,8 +32,34 @@ SortIt::SortIt(std::vector<int> values_to_sort, std::vector<int> values_sorted, 
 
 bool SortIt::trivial() { return unsorted_values.size() < 1; };
 
+int SortIt::numSorted() {
+	//Stochastic approach
+	//https://stackoverflow.com/questions/16994668/is-there-a-way-to-measure-how-sorted-a-list-is
+
+	std::random_device rd;     // Only used once to initialise (seed) engine
+	std::mt19937 rng(rd());    // Random-number engine used (Mersenne-Twister in this case)
+	std::uniform_int_distribution<int> uni(0, unsorted_values.size()-1); // Guaranteed unbiased
+	int sorted = 0;
+
+
+	for (int x = 0; x < 1000; x++) {
+		int i = uni(rng);
+		int j = i;
+		while (j == i)
+			j = uni(rng);
+		if (unsorted_values[std::min(i, j)] > unsorted_values[std::max(i, j)])
+			sorted++;
+	}
+
+	return sorted; //this is kind of a "sortedness" value
+}
+
 bool SortIt::better(class Problem* Reference) { 
-	return true;
+	//https://stackoverflow.com/questions/16994668/is-there-a-way-to-measure-how-sorted-a-list-is
+	//Stochastic Approach
+	if (numSorted() > Reference->numSorted())
+		return true;
+	return false;
 }
 
 bool SortIt::solved() {
@@ -130,7 +156,9 @@ class Problem* SortIt::simplifyProblem() {
 
 // selectBestAction in this case uses a Heap to select the max.   But in this case it is wrapped into simplify problem.
 void SortIt::selectBestAction() {
+	/*
 	std::cout << "\n heap";
 	for (auto el : heap )
 		std::cout << el << "*";
+	*/
 };
