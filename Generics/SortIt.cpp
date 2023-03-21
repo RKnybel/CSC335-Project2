@@ -1,6 +1,7 @@
 #include "SortIt.h"
 #include "Sorted.h"
 #include <vector>
+#include <random>
 
 SortIt::SortIt() {
 
@@ -27,6 +28,8 @@ SortIt::SortIt(std::vector<int> values_to_sort, std::vector<int> values_sorted, 
 	
 }
 
+
+
 bool SortIt::trivial() { return unsorted_values.size() < 1; };
 
 bool SortIt::better(class Problem* Reference) { return true; };
@@ -34,12 +37,23 @@ bool SortIt::better(class Problem* Reference) { return true; };
 bool SortIt::solved() {
 	// this checks to see if the elements in the list are in ascending order.
 	// if so, this sets sorted to the list and returns true, otherwise it returns false.
+	int lastVal = -100000;
+	for (int i : sorted_values) {
+		if (lastVal < i)
+			return false;
+		else
+			lastVal = 1;
+	}
+
 	return true; 
 };
 
 void SortIt::applyRandomAction() {
 	// apply a random action to the list, possibly a permutation.
+	auto rng = std::default_random_engine{}; //This random engine is literally fine for this purpose.
+	std::shuffle(std::begin(unsorted_values), std::end(unsorted_values), rng);
 }
+
 std::vector<int> SortIt::merge(std::vector<int> L1, std::vector<int> L2)
 {
 	std::vector<int> output(L1.size() + L2.size());

@@ -19,7 +19,7 @@ int main()
     // and example of the Dependency Inversion Principle, of S.O.L.I.D. the algorithm to solve the problem doesn't need to 
     // know what the solution looks like.
 
-
+    std::cout << "!--FACTORIAL TEST--!\n";
     std::cout << "\n The result is "<< (FactorialSolution *) result; // This is a down cast
 
     // but to adhere to the Liskov Substitution Principle  we can have our solution overload the
@@ -36,7 +36,8 @@ int main()
     }
 
 
-    
+
+    std::cout << "!--SORT TEST--!\n";
 
     auto random_integer = []() {
         std::random_device rd;     // Only used once to initialise (seed) engine
@@ -50,11 +51,16 @@ int main()
     std::generate(v.begin(), v.end(), random_integer);
     auto mySortProblem1 = SortIt_Using_Heap(v);
     auto SortedList = (Sorted *) SortIt::solveRecursive(mySortProblem1);
-    std::cout << "List Sorted (recursive)"<< SortedList;
+    std::cout << "List Sorted (recursive)" << SortedList;
 
     std::generate(v.begin(), v.end(), random_integer);
     auto mySortProblem2 = SortIt_Using_Heap(v);
     SortedList = (Sorted*)SortIt::solveGreedy(mySortProblem2);
     std::cout << "List Sorted (Greedy)" << SortedList;
+
+    std::generate(v.begin(), v.end(), random_integer);
+    auto mySortProblem3 = SortIt_Using_Heap(v);
+    SortedList = (Sorted*)SortIt::solveLasVegas(mySortProblem2);
+    std::cout << "List Sorted (Las Vegas)" << SortedList;
 }
 
