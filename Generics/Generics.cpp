@@ -1,4 +1,4 @@
-﻿// Generics.cpp : This file contains the 'main' function. Program execution begins and ends there.
+// Generics.cpp : This file contains the 'main' function. Program execution begins and ends there.
 // Sorry Dr. Rosiene a software developer is ruining your code :)))
 
 #include <iostream>
@@ -21,7 +21,7 @@ int main()
     // know what the solution looks like.
 
     std::cout << "!--FACTORIAL TEST--!\n";
-    std::cout << "\n The result is "<< (FactorialSolution *) result; // This is a down cast
+    std::cout << "\n The result is " << (FactorialSolution*)result; // This is a down cast
 
     // but to adhere to the Liskov Substitution Principle  we can have our solution overload the
     // ostream& operator<< and use the abstraction so the person using the Factorial Problem doesn't need to 
@@ -45,13 +45,13 @@ int main()
         std::random_device rd;     // Only used once to initialise (seed) engine
         std::mt19937 rng(rd());    // Random-number engine used (Mersenne-Twister in this case)
         std::uniform_int_distribution<int> uni(0, 100); // Guaranteed unbiased
-        return uni(rng);};
+        return uni(rng); };
 
     //input
     //could probably be command line arguments
 
-    std::cout << "Which algorithm? [R]ecursive, [G]reedy, [L]as Vegas or [M]onte Carlo?: ";
-    char mode; 
+    std::cout << "Which algorithm? [D]ivide and conquer, [G]reedy, [L]as Vegas or [M]onte Carlo?: ";
+    char mode;
     std::cin >> mode;
 
     std::cout << "What is the size of the list (N)? ";
@@ -65,7 +65,7 @@ int main()
     std::cout << "How many test iterations?: ";
     int iterations;
     std::cin >> iterations;
- 
+
     std::cout << "Print lists? [Y/N]: ";
     char print_lists;
     std::cin >> print_lists;
@@ -73,7 +73,7 @@ int main()
 
     std::cout << "Time to sort :)" << std::endl;
     std::cout << std::flush;
-    
+
     Problem* mySortProblem1;
     Problem* mySortProblem2;
     Problem* mySortProblem3;
@@ -101,17 +101,17 @@ int main()
 
 
             switch (mode) {
-            case 'R': //recursive sort
+            case 'D': //divide and conquer sort
                 std::generate(v.begin(), v.end(), random_integer);
                 mySortProblem1 = SortIt_Using_Heap(v);
 
                 t1 = std::chrono::high_resolution_clock::now();
-                SortedList = (Sorted*)SortIt::solveRecursive(mySortProblem1);
+                SortedList = (Sorted*)SortIt::solveDivideAndConquer(mySortProblem1);
                 t2 = std::chrono::high_resolution_clock::now();
                 us_int = std::chrono::duration_cast<std::chrono::microseconds>(t2 - t1);
 
                 if (print_lists == 'Y')
-                    std::cout << "\t\tList Sorted (recursive)" << SortedList << "\t\tTime: " << (long long)us_int.count() << "us";
+                    std::cout << "\t\tList Sorted (Divide and conquer)" << SortedList << "\t\tTime: " << (long long)us_int.count() << "us";
                 else
                     std::cout << (long long)us_int.count();
 
@@ -168,4 +168,3 @@ int main()
         }
     }
 }
-
