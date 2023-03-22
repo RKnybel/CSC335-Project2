@@ -96,7 +96,7 @@ int main()
             if (print_lists == 'Y')
                 std::cout << "\tList Size (n) is " << listSize << std::endl;
             else
-                std::cout << listSize << ',';
+                std::cout << listSize << ', ';
 
 
 
