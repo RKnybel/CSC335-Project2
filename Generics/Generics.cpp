@@ -54,11 +54,11 @@ int main()
     char mode;
     std::cin >> mode;
 
-    std::cout << "What is the size of the list (N)? ";
+    std::cout << "What is the lower bound of N?: ";
     int n;
     std::cin >> n;
 
-    std::cout << "How many times to double the size of N? ";
+    std::cout << "What is the upper bound of N?: ";
     int num_doubles;
     std::cin >> num_doubles;
 
@@ -88,9 +88,9 @@ int main()
         std::cout << "\nIteration " << i + 1 << std::endl;
         int listSize = n;
 
-        for (int r = 0; r <= num_doubles; r++) {
+        for (int r = 0; r < num_doubles; r++) {
             if (r != 0)
-                listSize *= 2;
+                listSize += 1;
             std::vector<int> v(listSize);
 
             if (print_lists == 'Y')
