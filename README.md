@@ -17,3 +17,4 @@ Project 2 for Computer Algorithms. Use this testing code to help with your paper
 5. Select just the microsecond values in your table, then insert a 2D line graph. ![image](https://user-images.githubusercontent.com/25082596/227085157-fb52a022-b892-4799-882b-50effceed0bc.png)
 
 ### I hope this program helps with the experiments for your papers. Good luck!
+The tutor is useless!
